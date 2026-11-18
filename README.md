@@ -2,6 +2,9 @@
 
 A Cross-Platrom Twitter Clone created with Quasar Framework, VueJS & Firebase
 
+## Documentation
+- [Forge Code Mode](docs/code-mode-smoke.md)
+
 ## Setup Firebase
 - Create a new Firebase project named Qwitter
 - Create a Web App named Qwitter
