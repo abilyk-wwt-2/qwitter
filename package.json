@@ -6,7 +6,8 @@
   "author": "Danny Connell",
   "private": true,
   "scripts": {
-    "test": "node scripts/validate.js"
+    "test": "node scripts/validate.js",
+    "lint": "eslint src"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
