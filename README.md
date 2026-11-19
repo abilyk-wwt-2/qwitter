@@ -98,3 +98,34 @@ quasar dev -m cordova -T android
 ```bash
 quasar build -m cordova -T android
 ```
+
+## Troubleshooting
+
+### Firebase Configuration Placeholder Error
+
+**Problem:** The app fails to start or Firebase operations don't work, and you see errors related to Firebase configuration.
+
+**Cause:** The file `src/boot/firebase.js` contains a placeholder comment `// YOUR CONFIG HERE` instead of actual Firebase credentials. This file must be manually configured before the app can run.
+
+**Solution:**
+1. Go to your [Firebase Console](https://console.firebase.google.com/)
+2. Select your Qwitter project
+3. Click on "Project Settings" (gear icon)
+4. Under the "Your apps" section, find your Web App and click on it
+5. Copy the Firebase config object (it will look like the example below)
+6. Open `src/boot/firebase.js` and replace the `// YOUR CONFIG HERE` comment with your config:
+
+```javascript
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-project.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project.appspot.com",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
+}
+```
+
+7. Save the file and restart the development server (`quasar dev`)
+
+**Note:** Never commit your Firebase credentials to version control. The `src/boot/firebase.js` file should be added to `.gitignore` if you plan to store real credentials there.
