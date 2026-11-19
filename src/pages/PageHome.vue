@@ -141,17 +141,17 @@ export default {
       }
       // this.qweets.unshift(newQweet)
       db.collection('qweets').add(newQweet).then(function(docRef) {
-        console.log('Document written with ID: ', docRef.id)
+        // Document added successfully
       }).catch(function(error) {
-        console.error('Error adding document: ', error)
+        // Error adding document
       })
       this.newQweetContent = ''
     },
     deleteQweet(qweet) {
       db.collection('qweets').doc(qweet.id).delete().then(function() {
-        console.log('Document successfully deleted!');
+        // Document successfully deleted
       }).catch(function(error) {
-        console.error('Error removing document: ', error);
+        // Error removing document
       })
     },
     toggleLiked(qweet) {
@@ -159,11 +159,11 @@ export default {
         liked: !qweet.liked
       })
       .then(function() {
-        console.log('Document successfully updated!')
+        // Document successfully updated
       })
       .catch(function(error) {
         // The document probably doesn't exist.
-        console.error('Error updating document: ', error)
+        // Error updating document
       })
     }
   },
@@ -178,16 +178,13 @@ export default {
         let qweetChange = change.doc.data()
         qweetChange.id = change.doc.id
         if (change.type === 'added') {
-          console.log('New qweet: ', qweetChange)
           this.qweets.unshift(qweetChange)
         }
         if (change.type === 'modified') {
-          console.log('Modified qweet: ', qweetChange)
           let index = this.qweets.findIndex(qweet => qweet.id === qweetChange.id)
           Object.assign(this.qweets[index], qweetChange)
         }
         if (change.type === 'removed') {
-          console.log('Removed qweet: ', qweetChange)
           let index = this.qweets.findIndex(qweet => qweet.id === qweetChange.id)
           this.qweets.splice(index, 1)
         }
