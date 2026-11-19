@@ -133,6 +133,11 @@ export default {
     }
   },
   methods: {
+    /**
+     * Adds a new qweet to the Firestore database
+     * Creates a new qweet document with the current content, timestamp, and liked status
+     * Clears the input field after submission
+     */
     addNewQweet() {
       let newQweet = {
         content: this.newQweetContent,
@@ -147,6 +152,10 @@ export default {
       })
       this.newQweetContent = ''
     },
+    /**
+     * Deletes a qweet from the Firestore database
+     * @param {Object} qweet - The qweet object to delete, must contain an id property
+     */
     deleteQweet(qweet) {
       db.collection('qweets').doc(qweet.id).delete().then(function() {
         console.log('Document successfully deleted!');
@@ -154,6 +163,10 @@ export default {
         console.error('Error removing document: ', error);
       })
     },
+    /**
+     * Toggles the liked status of a qweet in the Firestore database
+     * @param {Object} qweet - The qweet object to toggle, must contain an id and liked property
+     */
     toggleLiked(qweet) {
       db.collection('qweets').doc(qweet.id).update({
         liked: !qweet.liked
