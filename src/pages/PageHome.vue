@@ -45,60 +45,13 @@
           enter-active-class="animated fadeIn slow"
           leave-active-class="animated fadeOut slow"
         >
-          <q-item
+          <qweet-item
             v-for="qweet in qweets"
             :key="qweet.id"
-            class="qweet q-py-md"
-          >
-            <q-item-section avatar top>
-              <q-avatar size="xl">
-                <img :src="gravatarAvatarUrl">
-              </q-avatar>
-            </q-item-section>
-
-            <q-item-section>
-              <q-item-label class="text-subtitle1">
-                <strong>Danny Connell</strong>
-                <span class="text-grey-7">
-                  @danny__connell 
-                  <br class="lt-md">&bull; {{ qweet.date | relativeDate }}
-                </span>
-              </q-item-label>
-              <q-item-label class="qweet-content text-body1">{{ qweet.content }}</q-item-label>
-              <div class="qweet-icons row justify-between q-mt-sm">
-                <q-btn
-                  color="grey"
-                  icon="far fa-comment"
-                  size="sm"
-                  flat
-                  round
-                />
-                <q-btn
-                  color="grey"
-                  icon="fas fa-retweet"
-                  size="sm"
-                  flat
-                  round
-                />
-                <q-btn
-                  @click="toggleLiked(qweet)"
-                  :color="qweet.liked ? 'pink' : 'grey'"
-                  :icon="qweet.liked ? 'fas fa-heart' : 'far fa-heart'"
-                  size="sm"
-                  flat
-                  round
-                />
-                <q-btn
-                  @click="confirmDeleteQweet(qweet)"
-                  color="grey"
-                  icon="fas fa-trash"
-                  size="sm"
-                  flat
-                  round
-                />
-              </div>
-            </q-item-section>
-          </q-item>
+            :qweet="qweet"
+            @toggle-liked="toggleLiked"
+            @delete="confirmDeleteQweet"
+          />
         </transition-group>
       </q-list>
     </q-scroll-area>
@@ -107,12 +60,15 @@
 
 <script>
 import db from 'src/boot/firebase'
-import { formatDistance } from 'date-fns'
 import { GRAVATAR_AVATAR_URL } from 'src/config'
 import { useQuasar } from 'quasar'
+import QweetItem from 'components/QweetItem.vue'
 
 export default {
   name: 'PageHome',
+  components: {
+    QweetItem
+  },
   setup() {
     const $q = useQuasar()
     return { $q }
@@ -182,11 +138,6 @@ export default {
       })
     }
   },
-  filters: {
-    relativeDate(value) {
-      return formatDistance(value, new Date())
-    }
-  },
   mounted() {
     db.collection('qweets').orderBy('date').onSnapshot(snapshot => {
       snapshot.docChanges().forEach(change => {
@@ -221,10 +172,4 @@ export default {
   border-top: 1px solid
   border-bottom: 1px solid
   border-color: $grey-4
-.qweet:not(:first-child)
-  border-top: 1px solid rgba(0, 0, 0, 0.12)
-.qweet-content
-  white-space: pre-line
-.qweet-icons
-  margin-left: -5px
 </style>
