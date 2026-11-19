@@ -1,6 +1,17 @@
 <template>
   <q-page class="relative-position">
     <q-scroll-area class="absolute full-width full-height">
+      <!-- App Description Banner -->
+      <div class="app-description q-pa-lg bg-blue-1 border-bottom">
+        <h2 class="q-my-sm text-h6">Welcome to Qwitter</h2>
+        <p class="q-my-md text-body2">
+          Qwitter is a modern, cross-platform social media application built with Vue.js and Quasar Framework. 
+          Share your thoughts in real-time, connect with others, and engage with a growing community. 
+          Available on web, desktop (Windows, macOS, Linux), iOS, and Android. 
+          Join us today and start expressing yourself!
+        </p>
+      </div>
+
       <div class="q-py-lg q-px-md row items-end q-col-gutter-md">
         <div class="col">
           <q-input
@@ -213,6 +224,14 @@ export default {
 </script>
 
 <style lang="sass">
+.app-description
+  background-color: #E3F2FD
+  border-bottom: 1px solid #BBDEFB
+  h2
+    color: #1565C0
+  p
+    color: #424242
+    line-height: 1.6
 .new-qweet
   textarea
     font-size: 19px
