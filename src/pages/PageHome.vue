@@ -89,7 +89,7 @@
                   round
                 />
                 <q-btn
-                  @click="deleteQweet(qweet)"
+                  @click="confirmDeleteQweet(qweet)"
                   color="grey"
                   icon="fas fa-trash"
                   size="sm"
@@ -109,9 +109,14 @@
 import db from 'src/boot/firebase'
 import { formatDistance } from 'date-fns'
 import { GRAVATAR_AVATAR_URL } from 'src/config'
+import { useQuasar } from 'quasar'
 
 export default {
   name: 'PageHome',
+  setup() {
+    const $q = useQuasar()
+    return { $q }
+  },
   data() {
     return {
       gravatarAvatarUrl: GRAVATAR_AVATAR_URL,
@@ -146,6 +151,16 @@ export default {
         console.error('Error adding document: ', error)
       })
       this.newQweetContent = ''
+    },
+    confirmDeleteQweet(qweet) {
+      this.$q.dialog({
+        title: 'Delete Qweet',
+        message: 'Are you sure you want to delete this qweet? This action cannot be undone.',
+        cancel: true,
+        persistent: true
+      }).onOk(() => {
+        this.deleteQweet(qweet)
+      })
     },
     deleteQweet(qweet) {
       db.collection('qweets').doc(qweet.id).delete().then(function() {
