@@ -14,7 +14,7 @@
           >
             <template v-slot:before>
               <q-avatar size="xl">
-                <img src="https://s.gravatar.com/avatar/ce7f3697e231df38b3ca6065848520da?s=80">
+                <img :src="avatarUrl">
               </q-avatar>
             </template>
           </q-input>
@@ -52,7 +52,7 @@
           >
             <q-item-section avatar top>
               <q-avatar size="xl">
-                <img src="https://s.gravatar.com/avatar/ce7f3697e231df38b3ca6065848520da?s=80">
+                <img :src="avatarUrl">
               </q-avatar>
             </q-item-section>
 
@@ -108,11 +108,13 @@
 <script>
 import db from 'src/boot/firebase'
 import { formatDistance } from 'date-fns'
+import { GRAVATAR_AVATAR_URL } from 'src/config'
 
 export default {
   name: 'PageHome',
   data() {
     return {
+      avatarUrl: GRAVATAR_AVATAR_URL,
       newQweetContent: '',
       qweets: [
         // {
