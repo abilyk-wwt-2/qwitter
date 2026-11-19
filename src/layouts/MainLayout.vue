@@ -124,6 +124,10 @@
 </template>
 
 <script>
+/**
+ * MainLayout component
+ * Provides the main application layout with header, left navigation drawer, and right sidebar
+ */
 export default {
   data () {
     return {

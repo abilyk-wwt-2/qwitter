@@ -1,4 +1,9 @@
 
+/**
+ * Application routes configuration
+ * Defines the routing structure for the application including main layout and page components
+ * @type {Array<Object>}
+ */
 const routes = [
   {
     path: '/',

@@ -23,6 +23,10 @@
 </template>
 
 <script>
+/**
+ * Error404 component
+ * Displays a 404 error page when a route is not found
+ */
 export default {
   name: 'Error404'
 }
