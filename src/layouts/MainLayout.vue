@@ -124,6 +124,10 @@
 </template>
 
 <script>
+/**
+ * Main layout component that wraps all pages
+ * Provides header, navigation drawers, and page container
+ */
 export default {
   data () {
     return {

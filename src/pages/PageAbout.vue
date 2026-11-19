@@ -9,6 +9,10 @@
 </template>
 
 <script>
+/**
+ * About page component
+ * Displays information about the Qwitter application
+ */
 export default {
   name: 'PageAbout'
 }

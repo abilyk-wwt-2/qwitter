@@ -14,6 +14,10 @@ Vue.use(VueRouter)
  * with the Router instance.
  */
 
+/**
+ * Creates and configures the Vue Router instance
+ * @returns {VueRouter} Configured Vue Router instance
+ */
 export default function (/* { store, ssrContext } */) {
   const Router = new VueRouter({
     scrollBehavior: () => ({ x: 0, y: 0 }),

@@ -110,6 +110,10 @@ import db from 'src/boot/firebase'
 import { formatDistance } from 'date-fns'
 import { GRAVATAR_AVATAR_URL } from 'src/config'
 
+/**
+ * Home page component for displaying and managing qweets
+ * Allows users to create, delete, and like qweets with real-time updates from Firebase
+ */
 export default {
   name: 'PageHome',
   data() {
@@ -133,6 +137,10 @@ export default {
     }
   },
   methods: {
+    /**
+     * Adds a new qweet to the Firestore database
+     * Clears the input field after submission
+     */
     addNewQweet() {
       let newQweet = {
         content: this.newQweetContent,
@@ -147,6 +155,11 @@ export default {
       })
       this.newQweetContent = ''
     },
+    /**
+     * Deletes a qweet from the Firestore database
+     * @param {Object} qweet - The qweet object to delete
+     * @param {string} qweet.id - The unique identifier of the qweet
+     */
     deleteQweet(qweet) {
       db.collection('qweets').doc(qweet.id).delete().then(function() {
         console.log('Document successfully deleted!');
@@ -154,6 +167,12 @@ export default {
         console.error('Error removing document: ', error);
       })
     },
+    /**
+     * Toggles the liked status of a qweet in the Firestore database
+     * @param {Object} qweet - The qweet object to toggle
+     * @param {string} qweet.id - The unique identifier of the qweet
+     * @param {boolean} qweet.liked - The current liked status
+     */
     toggleLiked(qweet) {
       db.collection('qweets').doc(qweet.id).update({
         liked: !qweet.liked
@@ -168,10 +187,19 @@ export default {
     }
   },
   filters: {
+    /**
+     * Formats a timestamp as a relative date string (e.g., "5 minutes ago")
+     * @param {number} value - The timestamp in milliseconds
+     * @returns {string} Relative date string
+     */
     relativeDate(value) {
       return formatDistance(value, new Date())
     }
   },
+  /**
+   * Lifecycle hook that sets up real-time listener for qweets collection
+   * Listens for added, modified, and removed qweets and updates the component data
+   */
   mounted() {
     db.collection('qweets').orderBy('date').onSnapshot(snapshot => {
       snapshot.docChanges().forEach(change => {
