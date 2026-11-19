@@ -1,6 +1,10 @@
 <template>
   <q-page class="relative-position">
     <q-scroll-area class="absolute full-width full-height">
+      <div class="q-pt-lg q-px-md text-body1">
+        <p class="q-mb-none">Qwitter is a Twitter clone built with Quasar, Vue.js and Firebase. Share your thoughts in a qweet and see what everyone else is saying.</p>
+      </div>
+
       <div class="q-py-lg q-px-md row items-end q-col-gutter-md">
         <div class="col">
           <q-input
