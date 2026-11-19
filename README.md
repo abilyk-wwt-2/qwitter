@@ -8,6 +8,25 @@ A Cross-Platrom Twitter Clone created with Quasar Framework, VueJS & Firebase
 - Copy the config from the code sample that appears and add it to src/boot/firebase.js
 - Create a Cloud Firestore database - make sure you choose "Start in test mode"
 
+## Development
+
+### Install dependencies
+```bash
+npm install
+```
+
+### Run the dev server
+```bash
+quasar dev
+```
+Starts the development server at `http://localhost:8080` with hot reload.
+
+### Run tests
+```bash
+npm test
+```
+Validates Vue and JavaScript files for syntax errors and code quality issues.
+
 ## Install the dependencies
 ```bash
 npm install
