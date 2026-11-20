@@ -98,3 +98,5 @@ quasar dev -m cordova -T android
 ```bash
 quasar build -m cordova -T android
 ```
+
+This project is a social media application.
